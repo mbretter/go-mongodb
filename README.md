@@ -5,7 +5,7 @@
 This package wraps the go mongodb driver by providing a so-called "Connector", this makes the mongodb connection testable/mockable.
 The original driver is not really testable, it is hard/impossible to mock the package.
 
-Usually in go the interfaces are defined at the consumer, but in this case an interface is provided to keep the codebase small. 
+Usually in go the interfaces are defined at the consumer side, but in this case an interface is provided to keep the codebase small. 
 
 The provided connector interface can easily be mocked using [mockery](https://github.com/vektra/mockery).
 
@@ -39,7 +39,7 @@ Finding a row:
 ```go
 var ret User
 
-err := d.conn.FindOne(bson.D{{"_id", id}}).Decode(&ret)
+err := connector.FindOne(bson.D{{"_id", id}}).Decode(&ret)
 ```
 
 The functions are exactly the same as those of the mongodb driver, e.g. Find, FindOne, Count, UpdateOne, ...
@@ -58,7 +58,7 @@ You can optionally provide the name of the collection where the sequences are st
 
 ## Datatypes
 
-All datatypes are supporting JSON encoding/decoding, by implementing the marshal/unmarshal functions.
+Besides the BSON conversation, all datatypes are supporting JSON encoding/decoding, by implementing the marshal/unmarshal functions.
 
 ### ObjectId
 
@@ -68,7 +68,7 @@ The original ObjectId has two disadvantages:
 * every conversion between a string and an ObjectId has to be done using `ObjectIDFromHex()`, which adds a lot of extra code.
 
 The ObjectId provided by the types package derives from string, so conversions can be easily done using a simple type cast, 
-but you have to make sure, that the string is a valid ObjectId, otherwise you will get an error, when marshalling it to BSON.
+but you have to make sure, that the string contains a valid ObjectId in HEX format, otherwise you will get an error, when marshalling it to BSON.
 
 ```go
 hexOid := "61791c74138d41367e52d832"
@@ -78,7 +78,7 @@ objectId := types.ObjectId(hexOid)
 
 ### UUID
 
-The UUID derives from string for easily converting from strings, is it mashaled as `primitive.Binary` with the subtype of `bson.TypeBinaryUUID`.
+The UUID derives from string for easy conversion, it's BSON represenation is `primitive.Binary` with the subtype of `bson.TypeBinaryUUID`.
 This means it is store as native UUID into the database. An empty UUID is treated as null when converting to BSON.
 
 Under the hood, it uses github.com/google/uuid for parsing/generating values. Invalid values will produce an error if 
