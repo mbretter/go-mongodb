@@ -275,25 +275,25 @@ func (conn *StdConnector) Watch(pipeline interface{}, opts ...*options.ChangeStr
 }
 
 func (conn *StdConnector) GetNextSeq(name string, opts ...string) (seq int64, err error) {
-	if conn.collection == nil {
-		return 0, errors.New("no collection set")
-	}
-
 	if len(name) == 0 {
+		if conn.collection == nil {
+			return 0, errors.New("no collection set")
+		}
+
 		name = conn.collection.Name()
 	}
 
-	seqCollection := "sequence"
+	seqCollection := "Sequences"
 	if len(opts) > 0 {
 		seqCollection = opts[0]
 	}
 
 	res := conn.WithCollection(seqCollection).FindOneAndUpdate(
 		bson.D{{"_id", name}},
-		bson.D{{"$inc", bson.D{{"seq", 1}}}},
+		bson.D{{"$inc", bson.D{{"Current", 1}}}},
 		options.FindOneAndUpdate().SetUpsert(true),
 		options.FindOneAndUpdate().SetReturnDocument(options.After),
-		options.FindOneAndUpdate().SetProjection(bson.D{{"seq", 1}}))
+		options.FindOneAndUpdate().SetProjection(bson.D{{"Current", 1}}))
 
 	if res == nil {
 		return 0, nil
@@ -304,7 +304,7 @@ func (conn *StdConnector) GetNextSeq(name string, opts ...string) (seq int64, er
 		return 0, err
 	}
 
-	switch v := data["seq"].(type) {
+	switch v := data["Current"].(type) {
 	case int32:
 		return int64(int(v)), nil
 	case int64:
