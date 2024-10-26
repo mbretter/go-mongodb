@@ -1,3 +1,5 @@
+// Package types provides a binary datatype. The binary datatype stores any arbitrary value as binary,
+// the binary subtype is `bson.TypeBinaryGeneric`. The JSON representation of the binary is base64.
 package types
 
 import (
@@ -11,6 +13,7 @@ import (
 
 type Binary []byte
 
+// MarshalJSON serializes the Binary receiver as a base64-encoded string or null if empty.
 func (b Binary) MarshalJSON() ([]byte, error) {
 	if len(b) == 0 {
 		return json.Marshal(nil)
@@ -19,6 +22,7 @@ func (b Binary) MarshalJSON() ([]byte, error) {
 	return json.Marshal(base64.StdEncoding.EncodeToString(b))
 }
 
+// UnmarshalJSON decodes a JSON-encoded byte slice as a base64-encoded string and stores the result in the Binary receiver.
 func (b *Binary) UnmarshalJSON(data []byte) error {
 	if len(data) == 0 {
 		*b = nil
@@ -46,6 +50,7 @@ func (b *Binary) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+// MarshalBSONValue serializes the Binary receiver into a BSON value.
 func (b Binary) MarshalBSONValue() (bsontype.Type, []byte, error) {
 	if len(b) == 0 {
 		return bson.TypeNull, nil, nil
@@ -54,6 +59,7 @@ func (b Binary) MarshalBSONValue() (bsontype.Type, []byte, error) {
 	return bson.MarshalValue(primitive.Binary{Data: b, Subtype: bson.TypeBinaryGeneric})
 }
 
+// UnmarshalBSONValue decodes a BSON value into the Binary receiver, ensuring it is of the correct BSON type and subtype.
 func (b *Binary) UnmarshalBSONValue(t bsontype.Type, data []byte) error {
 	if t == bson.TypeNull {
 		*b = nil

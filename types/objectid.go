@@ -1,3 +1,9 @@
+// Package types provides an ObjectId replacement of the mongodb drivers primitive.ObjectId.
+// The original ObjectId has two disadvantages:
+//
+// * an empty ObjectId is stored as "000000000000000000000000", instead of null, which is kind of weird.
+//
+// * every conversion between a string and an ObjectId has to be done using ObjectIDFromHex(), which adds a lot of extra code.
 package types
 
 import (
@@ -20,14 +26,18 @@ var objectIdGenerator = func() string {
 	return newOid.Hex()
 }
 
+// SetObjectIdGenerator sets a custom function for generating ObjectId strings.
+// This is mainly used for testing purposes.
 func SetObjectIdGenerator(g func() string) {
 	objectIdGenerator = g
 }
 
+// NewObjectId generates and returns a new ObjectId using the objectIdGenerator function.
 func NewObjectId() ObjectId {
 	return ObjectId(objectIdGenerator())
 }
 
+// ObjectIdFromHex converts a hexadecimal string representation of an ObjectId to an ObjectId type, returning an error if invalid.
 func ObjectIdFromHex(s string) (ObjectId, error) {
 	oId, err := primitive.ObjectIDFromHex(s)
 	if err != nil {
@@ -37,10 +47,12 @@ func ObjectIdFromHex(s string) (ObjectId, error) {
 	return ObjectId(oId.Hex()), nil
 }
 
+// IsZero checks if the ObjectId is zero (an empty string) and returns true if it is, otherwise false.
 func (o ObjectId) IsZero() bool {
 	return len(o) == 0
 }
 
+// String returns the string representation of the ObjectId. If the ObjectId is zero, it returns "null".
 func (o ObjectId) String() string {
 	if o.IsZero() {
 		return "null"
@@ -49,6 +61,7 @@ func (o ObjectId) String() string {
 	return fmt.Sprintf("ObjectID(%s)", string(o))
 }
 
+// MarshalJSON serializes the ObjectId to JSON, rendering as null if the ObjectId is zero or equals NilObjectID.
 func (o ObjectId) MarshalJSON() ([]byte, error) {
 	if len(o) == 0 {
 		return json.Marshal(nil)
@@ -61,6 +74,7 @@ func (o ObjectId) MarshalJSON() ([]byte, error) {
 	return json.Marshal(string(o))
 }
 
+// UnmarshalJSON unmarshals a JSON-encoded string into an ObjectId. Handles null values by setting the ObjectId to an empty string.
 func (o *ObjectId) UnmarshalJSON(data []byte) error {
 	var hexStr string
 	err := json.Unmarshal(data, &hexStr)
@@ -83,6 +97,7 @@ func (o *ObjectId) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+// MarshalBSONValue serializes the ObjectId to BSON. It returns BSON null type for zero values or in case of invalid ObjectId.
 func (o ObjectId) MarshalBSONValue() (bsontype.Type, []byte, error) {
 	if len(o) == 0 {
 		return bson.TypeNull, nil, nil
@@ -99,6 +114,7 @@ func (o ObjectId) MarshalBSONValue() (bsontype.Type, []byte, error) {
 	return bson.MarshalValue(oId)
 }
 
+// UnmarshalBSONValue deserializes BSON value into ObjectId type. Returns an error if the BSON type is invalid.
 func (o *ObjectId) UnmarshalBSONValue(t bsontype.Type, data []byte) error {
 	if t == bson.TypeNull {
 		*o = ""
