@@ -80,7 +80,7 @@ objectId := types.ObjectId(hexOid)
 ### UUID
 
 The UUID derives from string for easy conversion, it's BSON represenation is `primitive.Binary` with the subtype of `bson.TypeBinaryUUID`.
-This means it is store as native UUID into the database. An empty UUID is treated as null when converting to BSON.
+This means it is stored as native UUID into the database. An empty UUID is treated as null when converting to BSON.
 
 Under the hood, it uses github.com/google/uuid for parsing/generating values. Invalid values will produce an error if 
 converting to BSON.
