@@ -1,17 +1,18 @@
-package types
+package types_test
 
 import (
 	"encoding/json"
+	"github.com/mbretter/go-mongodb/types"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
 	"testing"
 )
 
 type NumberTest struct {
-	Float32 NullFloat32 `json:"float32"`
-	Float64 NullFloat64 `json:"float64"`
-	Int32   NullInt32   `json:"int32"`
-	Int64   NullInt64   `json:"int64"`
+	Float32 types.NullFloat32 `json:"float32"`
+	Float64 types.NullFloat64 `json:"float64"`
+	Int32   types.NullInt32   `json:"int32"`
+	Int64   types.NullInt64   `json:"int64"`
 }
 
 func TestNumber_MarshalEmpty(t *testing.T) {

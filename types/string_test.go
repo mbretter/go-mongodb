@@ -1,14 +1,15 @@
-package types
+package types_test
 
 import (
 	"encoding/json"
+	"github.com/mbretter/go-mongodb/types"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
 	"testing"
 )
 
 type StringTest struct {
-	Name NullString `json:"name"`
+	Name types.NullString `json:"name"`
 }
 
 func TestString_MarshalEmpty(t *testing.T) {

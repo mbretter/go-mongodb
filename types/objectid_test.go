@@ -1,21 +1,22 @@
-package types
+package types_test
 
 import (
 	"encoding/json"
+	"github.com/mbretter/go-mongodb/types"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
 	"testing"
 )
 
 type ObjectIdTest struct {
-	Id ObjectId `json:"_id" bson:"_id"`
+	Id types.ObjectId `json:"_id" bson:"_id"`
 }
 
 func TestObjectId_New(t *testing.T) {
-	oId := NewObjectId()
-	oId2 := NewObjectId()
+	oId := types.NewObjectId()
+	oId2 := types.NewObjectId()
 
-	emptyOid := ObjectId("")
+	emptyOid := types.ObjectId("")
 
 	assert.NotEqual(t, oId, oId2)
 	assert.NotZero(t, oId)
@@ -23,18 +24,18 @@ func TestObjectId_New(t *testing.T) {
 }
 
 func TestObjectId_NewGenerator(t *testing.T) {
-	SetObjectIdGenerator(func() string {
+	types.SetObjectIdGenerator(func() string {
 		return "6555d2cc4fce49f464c2f683"
 	})
 
-	s := NewObjectId()
+	s := types.NewObjectId()
 	assert.Equal(t, "6555d2cc4fce49f464c2f683", string(s))
 }
 
 func TestObjectId_MarshalJSON(t *testing.T) {
 	s := ObjectIdTest{}
 
-	o, _ := ObjectIdFromHex("6555d2cc4fce49f464c2f683")
+	o, _ := types.ObjectIdFromHex("6555d2cc4fce49f464c2f683")
 	s.Id = o
 	j, _ := json.Marshal(s)
 
@@ -42,19 +43,19 @@ func TestObjectId_MarshalJSON(t *testing.T) {
 }
 
 func TestObjectId_FromHexInvalid(t *testing.T) {
-	oId, err := ObjectIdFromHex("x")
+	oId, err := types.ObjectIdFromHex("x")
 
 	assert.NotNil(t, err)
 	assert.Zero(t, oId)
 }
 
 func TestObjectId_String(t *testing.T) {
-	oId, err := ObjectIdFromHex("6555d2cc4fce49f464c2f683")
+	oId, err := types.ObjectIdFromHex("6555d2cc4fce49f464c2f683")
 
 	assert.Nil(t, err)
 	assert.Equal(t, "ObjectID(6555d2cc4fce49f464c2f683)", oId.String())
 
-	oId = ObjectId("")
+	oId = types.ObjectId("")
 	assert.Equal(t, "null", oId.String())
 }
 
@@ -111,7 +112,7 @@ func TestObjectId_UnmarshalJSONInvalidJson(t *testing.T) {
 func TestObjectId_MarshalBSON(t *testing.T) {
 	s := ObjectIdTest{}
 
-	u, _ := ObjectIdFromHex("6555d2cc4fce49f464c2f683")
+	u, _ := types.ObjectIdFromHex("6555d2cc4fce49f464c2f683")
 	s.Id = u
 	b, err := bson.Marshal(s)
 
@@ -142,7 +143,7 @@ func TestObjectId_MarshalBSONNull(t *testing.T) {
 func TestObjectId_MarshalBSONZeroObjectId(t *testing.T) {
 	s := ObjectIdTest{}
 
-	u, _ := ObjectIdFromHex("000000000000000000000000")
+	u, _ := types.ObjectIdFromHex("000000000000000000000000")
 	s.Id = u
 	b, err := bson.Marshal(s)
 

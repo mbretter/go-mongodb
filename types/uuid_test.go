@@ -1,39 +1,40 @@
-package types
+package types_test
 
 import (
 	"encoding/json"
+	"github.com/mbretter/go-mongodb/types"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
 	"testing"
 )
 
 type UuidTest struct {
-	Uid UUID `json:"uuid" bson:"uuid"`
+	Uid types.UUID `json:"uuid" bson:"uuid"`
 }
 
 func TestUUID_New(t *testing.T) {
-	s := NewUuid()
+	s := types.NewUuid()
 
 	assert.NotZero(t, s.String())
 
-	s2 := UUID("")
+	s2 := types.UUID("")
 	assert.True(t, s2.IsZero())
 	assert.Zero(t, s2.String())
 }
 
 func TestUUID_NewGenerator(t *testing.T) {
-	SetUuidGenerator(func() string {
+	types.SetUuidGenerator(func() string {
 		return "f47ac10b-58cc-0372-8567-0e02b2c3d479"
 	})
 
-	s := NewUuid()
+	s := types.NewUuid()
 	assert.Equal(t, "f47ac10b-58cc-0372-8567-0e02b2c3d479", s.String())
 }
 
 func TestUUID_MarshalJSON(t *testing.T) {
 	s := UuidTest{}
 
-	u, _ := UuidFromString("f47ac10b-58cc-0372-8567-0e02b2c3d479")
+	u, _ := types.UuidFromString("f47ac10b-58cc-0372-8567-0e02b2c3d479")
 	s.Uid = u
 	j, _ := json.Marshal(s)
 
@@ -87,7 +88,7 @@ func TestUUID_UnmarshalJSONInvalidUuid(t *testing.T) {
 func TestUUID_MarshalBSON(t *testing.T) {
 	s := UuidTest{}
 
-	u, _ := UuidFromString("f47ac10b-58cc-0372-8567-0e02b2c3d479")
+	u, _ := types.UuidFromString("f47ac10b-58cc-0372-8567-0e02b2c3d479")
 	s.Uid = u
 	b, err := bson.Marshal(s)
 

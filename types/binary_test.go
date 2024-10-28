@@ -1,15 +1,16 @@
-package types
+package types_test
 
 import (
 	"encoding/base64"
 	"encoding/json"
+	"github.com/mbretter/go-mongodb/types"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
 	"testing"
 )
 
 type BinaryTest struct {
-	Data Binary `json:"data" bson:"data"`
+	Data types.Binary `json:"data" bson:"data"`
 }
 
 // png 10x10 white bg
@@ -61,14 +62,14 @@ func TestBinary_UnmarshalJSONEmpty(t *testing.T) {
 	s := BinaryTest{}
 
 	_ = json.Unmarshal([]byte(`{"data":""}`), &s)
-	assert.Equal(t, Binary(nil), s.Data)
+	assert.Equal(t, types.Binary(nil), s.Data)
 
 	_ = json.Unmarshal([]byte(`{"data":null}`), &s)
-	assert.Equal(t, Binary(nil), s.Data)
+	assert.Equal(t, types.Binary(nil), s.Data)
 
 	err := s.Data.UnmarshalJSON([]byte(""))
 	if assert.Nil(t, err) {
-		assert.Nil(t, s.Data, Binary(nil))
+		assert.Nil(t, s.Data, types.Binary(nil))
 	}
 }
 
@@ -109,7 +110,7 @@ func TestBinary_UnmarshalBSON(t *testing.T) {
 	err := bson.Unmarshal([]byte("\x16\x01\x00\x00\x05data\x00\x06\x01\x00\x00\x00\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\n\x00\x00\x00\n\x01\x00\x00\x00\x00\xa5I\xf2\x10\x00\x00\x00\x04gAMA\x00\x00\xb1\x8f\v\xfca\x05\x00\x00\x00 cHRM\x00\x00z&\x00\x00\x80\x84\x00\x00\xfa\x00\x00\x00\x80\xe8\x00\x00u0\x00\x00\xea`\x00\x00:\x98\x00\x00\x17p\x9c\xbaQ<\x00\x00\x00\x02bKGD\x00\x01݊\x13\xa4\x00\x00\x00\atIME\a\xe7\f\x01\n6/\x95\x83\"\x04\x00\x00\x00\x0eIDAT\b\xd7c\xf8\x7f\x80\x017\x02\x00\aR\x11w\xe6\xc8\xd0\xe3\x00\x00\x00%tEXtdate:create\x002023-12-01T10:54:47+00:00.\x01\xba\xae\x00\x00\x00%tEXtdate:modify\x002023-12-01T10:54:47+00:00_\\\x02\x12\x00\x00\x00\x00IEND\xaeB`\x82\x00"), &s)
 
 	if assert.Nil(t, err) {
-		assert.Equal(t, Binary(binaryTestData), s.Data)
+		assert.Equal(t, types.Binary(binaryTestData), s.Data)
 	}
 }
 
@@ -119,7 +120,7 @@ func TestBinary_UnmarshalBSONEmpty(t *testing.T) {
 	err := bson.Unmarshal([]byte("\v\x00\x00\x00\ndata\x00\x00"), &s)
 
 	if assert.Nil(t, err) {
-		assert.Equal(t, Binary(nil), s.Data)
+		assert.Equal(t, types.Binary(nil), s.Data)
 	}
 }
 
