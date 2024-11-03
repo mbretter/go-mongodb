@@ -3,7 +3,7 @@
 [![codecov](https://codecov.io/gh/mbretter/go-mongodb/graph/badge.svg?token=YMBMKY7W9X)](https://codecov.io/gh/mbretter/go-mongodb)
 [![GoDoc](https://godoc.org/github.com/mbretter/go-mongodb?status.svg)](https://pkg.go.dev/github.com/mbretter/go-mongodb)
 
-This package wraps the go mongodb driver by providing a so-called "Connector", this makes the mongodb connection testable/mockable.
+This package wraps the go mongo-driver by providing a so-called "Connector", this makes the mongodb connection testable/mockable.
 The original driver is not really testable, it is hard/impossible to mock the package.
 
 Usually in go the interfaces are defined at the consumer side, but in this case an interface is provided to keep the codebase small. 
@@ -43,11 +43,11 @@ var ret User
 err := connector.FindOne(bson.D{{"_id", id}}).Decode(&ret)
 ```
 
-The functions are exactly the same as those of the mongodb driver, e.g. Find, FindOne, Count, UpdateOne, ...
+The functions are exactly the same as those of the mongo-driver, e.g. Find, FindOne, Count, UpdateOne, ...
 
 ### Sequences
 
-Besided the wrapped functions of the mongodb driver, a function for fetching sequence numbers was implemented, it returns 
+Besided the wrapped functions of the mongo-driver, a function for fetching sequence numbers was implemented, it returns 
 the next number by using `FindOneAndUpdate()`, with the upsert option.
 
 ```go
@@ -59,11 +59,11 @@ You can optionally provide the name of the collection where the sequences are st
 
 ## Datatypes
 
-Besides the BSON conversation, all datatypes are supporting JSON encoding/decoding, by implementing the marshal/unmarshal functions.
+Besides the BSON convertion, all datatypes are supporting JSON encoding/decoding, by implementing the marshal/unmarshal functions.
 
 ### ObjectId
 
-The types package adds an `ObjectId` replacement of the mongodb drivers `primitive.ObjectId`. 
+The types package adds an `ObjectId` replacement of the mongo-drivers `primitive.ObjectId`. 
 The original ObjectId has two disadvantages:
 * an empty ObjectId is stored as "000000000000000000000000", instead of null, which is kind of weird.
 * every conversion between a string and an ObjectId has to be done using `ObjectIDFromHex()`, which adds a lot of extra code.
