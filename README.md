@@ -59,7 +59,7 @@ You can optionally provide the name of the collection where the sequences are st
 
 ## Datatypes
 
-Besides the BSON convertion, all datatypes are supporting JSON encoding/decoding, by implementing the marshal/unmarshal functions.
+Besides the BSON conversion, all datatypes are supporting JSON encoding/decoding, by implementing the marshal/unmarshal functions.
 
 ### ObjectId
 
