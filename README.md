@@ -10,7 +10,7 @@ Usually in go the interfaces are defined at the consumer side, but in this case 
 
 The provided connector interface can easily be mocked using [mockery](https://github.com/vektra/mockery).
 
-Additionaly this package provides some datatypes, like UUID, ObjectId, NullString, nullable numbers and a datatype for 
+Additionally, this package provides some datatypes, like UUID, ObjectId, NullString, nullable numbers and a datatype for 
 storing binary data.
 
 ## Connector
