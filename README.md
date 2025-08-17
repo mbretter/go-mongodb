@@ -13,6 +13,14 @@ The provided connector interface can easily be mocked using [mockery](https://gi
 Additionally, this package provides some datatypes, like UUID, ObjectId, NullString, nullable numbers and a datatype for 
 storing binary data.
 
+This is version 2 of the package, which uses mongo-driver v2.
+
+## Install
+
+```
+go get github.com/mbretter/go-mongodb/v2
+```
+
 ## Connector
 
 Constructing a new connector, by returning a StdConnector:
@@ -121,8 +129,8 @@ package user
 
 import (
     "errors"
-    "github.com/mbretter/go-mongodb"
-    "github.com/mbretter/go-mongodb/types"
+    "github.com/mbretter/go-mongodb/v2"
+    "github.com/mbretter/go-mongodb/v2/types"
     "github.com/stretchr/testify/assert"
     "go.mongodb.org/mongo-driver/bson"
     "go.mongodb.org/mongo-driver/mongo"
