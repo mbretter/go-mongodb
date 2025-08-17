@@ -2,11 +2,11 @@ package mongodb_test
 
 import (
 	"errors"
-	"github.com/mbretter/go-mongodb"
-	"github.com/mbretter/go-mongodb/types"
+	"github.com/mbretter/go-mongodb/v2"
+	"github.com/mbretter/go-mongodb/v2/types"
 	"github.com/stretchr/testify/assert"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/v2/bson"
+	"go.mongodb.org/mongo-driver/v2/mongo"
 	"log"
 	"os"
 	"testing"
@@ -164,9 +164,9 @@ func Example() {
 	}
 }
 
-// Example_Test tests the scenario for user creation, ensuring correct insertion and data consistency.
+// Example_TestCreate tests the scenario for user creation, ensuring correct insertion and data consistency.
 // The Connector is mocked using the auto-generated mock by mockery.
-// The ObjectId generator function is stubbed, to get reproducable results.
+// The ObjectId generator function is stubbed to get reproducable results.
 func Example_TestCreate(t *testing.T) {
 	newUserId := "66cc9ca8c042f7a732b7fc2a"
 	types.SetObjectIdGenerator(func() string { return newUserId })

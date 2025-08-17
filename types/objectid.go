@@ -10,9 +10,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/bsontype"
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 // ObjectId holds a mongodb objectid
@@ -22,7 +20,7 @@ type ObjectId string
 var NilObjectID = ObjectId("000000000000000000000000")
 
 var objectIdGenerator = func() string {
-	newOid := primitive.NewObjectID()
+	newOid := bson.NewObjectID()
 	return newOid.Hex()
 }
 
@@ -39,7 +37,7 @@ func NewObjectId() ObjectId {
 
 // ObjectIdFromHex converts a hexadecimal string representation of an ObjectId to an ObjectId type, returning an error if invalid.
 func ObjectIdFromHex(s string) (ObjectId, error) {
-	oId, err := primitive.ObjectIDFromHex(s)
+	oId, err := bson.ObjectIDFromHex(s)
 	if err != nil {
 		return "", err
 	}
@@ -88,7 +86,7 @@ func (o *ObjectId) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	oId, err := primitive.ObjectIDFromHex(hexStr)
+	oId, err := bson.ObjectIDFromHex(hexStr)
 	if err != nil {
 		return err
 	}
@@ -98,24 +96,25 @@ func (o *ObjectId) UnmarshalJSON(data []byte) error {
 }
 
 // MarshalBSONValue serializes the ObjectId to BSON. It returns BSON null type for zero values or in case of invalid ObjectId.
-func (o ObjectId) MarshalBSONValue() (bsontype.Type, []byte, error) {
+func (o ObjectId) MarshalBSONValue() (byte, []byte, error) {
 	if len(o) == 0 {
-		return bson.TypeNull, nil, nil
+		return byte(bson.TypeNull), nil, nil
 	}
-	oId, err := primitive.ObjectIDFromHex(string(o))
+	oId, err := bson.ObjectIDFromHex(string(o))
 	if err != nil {
 		return 0, nil, err
 	}
 
 	if oId.IsZero() {
-		return bson.TypeNull, nil, nil
+		return byte(bson.TypeNull), nil, nil
 	}
 
-	return bson.MarshalValue(oId)
+	return marshalBsonValue(oId)
 }
 
 // UnmarshalBSONValue deserializes BSON value into ObjectId type. Returns an error if the BSON type is invalid.
-func (o *ObjectId) UnmarshalBSONValue(t bsontype.Type, data []byte) error {
+func (o *ObjectId) UnmarshalBSONValue(typ byte, data []byte) error {
+	t := bson.Type(typ)
 	if t == bson.TypeNull {
 		*o = ""
 		return nil
@@ -125,7 +124,7 @@ func (o *ObjectId) UnmarshalBSONValue(t bsontype.Type, data []byte) error {
 		return errors.New("wrong bson type expected objectid")
 	}
 
-	oId := primitive.ObjectID(data)
+	oId := bson.ObjectID(data)
 
 	*o = ObjectId(oId.Hex())
 

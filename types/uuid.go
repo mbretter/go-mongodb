@@ -7,9 +7,7 @@ import (
 	"encoding/json"
 	"errors"
 	"github.com/google/uuid"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/bsontype"
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 type UUID string
@@ -69,9 +67,9 @@ func (u *UUID) UnmarshalJSON(data []byte) error {
 }
 
 // MarshalBSONValue marshals the UUID into a BSON value. Returns BSON type, byte slice, and an error if any.
-func (u UUID) MarshalBSONValue() (bsontype.Type, []byte, error) {
+func (u UUID) MarshalBSONValue() (byte, []byte, error) {
 	if u.IsZero() {
-		return bson.TypeNull, nil, nil
+		return byte(bson.TypeNull), nil, nil
 	}
 
 	uid, err := uuid.Parse(string(u))
@@ -84,15 +82,16 @@ func (u UUID) MarshalBSONValue() (bsontype.Type, []byte, error) {
 		return 0, nil, err
 	}
 
-	bin := primitive.Binary{
+	bin := bson.Binary{
 		Subtype: bson.TypeBinaryUUID,
 		Data:    data,
 	}
-	return bson.MarshalValue(bin)
+	return marshalBsonValue(bin)
 }
 
 // UnmarshalBSONValue deserializes a BSON value into a UUID. Returns an error if the BSON type or subtype is incorrect.
-func (u *UUID) UnmarshalBSONValue(t bsontype.Type, data []byte) error {
+func (u *UUID) UnmarshalBSONValue(typ byte, data []byte) error {
+	t := bson.Type(typ)
 	if t == bson.TypeNull {
 		*u = ""
 		return nil
@@ -102,7 +101,7 @@ func (u *UUID) UnmarshalBSONValue(t bsontype.Type, data []byte) error {
 		return errors.New("wrong bson type expected binary")
 	}
 
-	bin := primitive.Binary{}
+	bin := bson.Binary{}
 
 	err := bson.UnmarshalValue(t, data, &bin)
 	if err != nil {

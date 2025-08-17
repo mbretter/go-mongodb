@@ -3,9 +3,9 @@ package types_test
 import (
 	"encoding/base64"
 	"encoding/json"
-	"github.com/mbretter/go-mongodb/types"
+	"github.com/mbretter/go-mongodb/v2/types"
 	"github.com/stretchr/testify/assert"
-	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/v2/bson"
 	"testing"
 )
 

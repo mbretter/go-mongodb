@@ -1,4 +1,4 @@
-// Package types provides a binary datatype. The binary datatype stores any arbitrary value as binary,
+// Package types provide a binary datatype. The binary datatype stores any arbitrary value as binary,
 // the binary subtype is `bson.TypeBinaryGeneric`. The JSON representation of the binary is base64.
 package types
 
@@ -6,9 +6,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"errors"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/bsontype"
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 type Binary []byte
@@ -51,16 +49,17 @@ func (b *Binary) UnmarshalJSON(data []byte) error {
 }
 
 // MarshalBSONValue serializes the Binary receiver into a BSON value.
-func (b Binary) MarshalBSONValue() (bsontype.Type, []byte, error) {
+func (b Binary) MarshalBSONValue() (byte, []byte, error) {
 	if len(b) == 0 {
-		return bson.TypeNull, nil, nil
+		return byte(bson.TypeNull), nil, nil
 	}
 
-	return bson.MarshalValue(primitive.Binary{Data: b, Subtype: bson.TypeBinaryGeneric})
+	return marshalBsonValue(bson.Binary{Data: b, Subtype: bson.TypeBinaryGeneric})
 }
 
 // UnmarshalBSONValue decodes a BSON value into the Binary receiver, ensuring it is of the correct BSON type and subtype.
-func (b *Binary) UnmarshalBSONValue(t bsontype.Type, data []byte) error {
+func (b *Binary) UnmarshalBSONValue(typ byte, data []byte) error {
+	t := bson.Type(typ)
 	if t == bson.TypeNull {
 		*b = nil
 		return nil
@@ -70,7 +69,7 @@ func (b *Binary) UnmarshalBSONValue(t bsontype.Type, data []byte) error {
 		return errors.New("wrong bson type expected binary")
 	}
 
-	prim := primitive.Binary{}
+	prim := bson.Binary{}
 	err := bson.UnmarshalValue(t, data, &prim)
 	if err != nil {
 		return err

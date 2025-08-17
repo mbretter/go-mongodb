@@ -3,8 +3,7 @@ package types
 
 import (
 	"encoding/json"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/bsontype"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 type NullString string
@@ -18,9 +17,9 @@ func (v NullString) MarshalJSON() ([]byte, error) {
 }
 
 // MarshalBSONValue serializes the NullString value to BSON. If the value is empty, it returns BSON null.
-func (v NullString) MarshalBSONValue() (bsontype.Type, []byte, error) {
+func (v NullString) MarshalBSONValue() (byte, []byte, error) {
 	if len(v) == 0 {
-		return bson.TypeNull, nil, nil
+		return byte(bson.TypeNull), nil, nil
 	}
-	return bson.MarshalValue(string(v))
+	return marshalBsonValue(string(v))
 }

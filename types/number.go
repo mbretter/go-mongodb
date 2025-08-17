@@ -1,10 +1,9 @@
-// Package types provides various number datatypes, they are treated as BSON-null if their value is 0 oder 0.0 and vice versa.
+// Package types provide various number datatypes, they are treated as BSON-null if their value is 0 oder 0.0 and vice versa.
 package types
 
 import (
 	"encoding/json"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/bsontype"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 type NullFloat32 float64
@@ -18,11 +17,11 @@ func (v NullFloat32) MarshalJSON() ([]byte, error) {
 }
 
 // MarshalBSONValue serializes the NullFloat32 value to BSON. If the value is 0, it marshals to BSON null; otherwise, as float32.
-func (v NullFloat32) MarshalBSONValue() (bsontype.Type, []byte, error) {
+func (v NullFloat32) MarshalBSONValue() (byte, []byte, error) {
 	if v == 0 {
-		return bson.TypeNull, nil, nil
+		return byte(bson.TypeNull), nil, nil
 	}
-	return bson.MarshalValue(float32(v))
+	return marshalBsonValue(float32(v))
 }
 
 type NullFloat64 float64
@@ -36,11 +35,11 @@ func (v NullFloat64) MarshalJSON() ([]byte, error) {
 }
 
 // MarshalBSONValue customizes the BSON marshaling process for NullFloat64. It returns BSON Null type
-func (v NullFloat64) MarshalBSONValue() (bsontype.Type, []byte, error) {
+func (v NullFloat64) MarshalBSONValue() (byte, []byte, error) {
 	if v == 0 {
-		return bson.TypeNull, nil, nil
+		return byte(bson.TypeNull), nil, nil
 	}
-	return bson.MarshalValue(float64(v))
+	return marshalBsonValue(float64(v))
 }
 
 type NullInt32 int32
@@ -54,11 +53,11 @@ func (v NullInt32) MarshalJSON() ([]byte, error) {
 }
 
 // MarshalBSONValue serializes the NullInt32 value into BSON format, encoding zero values as null.
-func (v NullInt32) MarshalBSONValue() (bsontype.Type, []byte, error) {
+func (v NullInt32) MarshalBSONValue() (byte, []byte, error) {
 	if v == 0 {
-		return bson.TypeNull, nil, nil
+		return byte(bson.TypeNull), nil, nil
 	}
-	return bson.MarshalValue(int32(v))
+	return marshalBsonValue(int32(v))
 }
 
 type NullInt64 int64
@@ -72,9 +71,9 @@ func (v NullInt64) MarshalJSON() ([]byte, error) {
 }
 
 // MarshalBSONValue serializes NullInt64 into a BSON value. Returns BSON null type if the value is zero.
-func (v NullInt64) MarshalBSONValue() (bsontype.Type, []byte, error) {
+func (v NullInt64) MarshalBSONValue() (byte, []byte, error) {
 	if v == 0 {
-		return bson.TypeNull, nil, nil
+		return byte(bson.TypeNull), nil, nil
 	}
-	return bson.MarshalValue(int64(v))
+	return marshalBsonValue(int64(v))
 }

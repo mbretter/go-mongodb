@@ -1,12 +1,11 @@
-quiet: False
-disable-version-string: True
-with-expecter: True
-mockname: "{{.InterfaceName}}Mock"
-filename: "{{.InterfaceNameLower}}_test.go"
-outpkg: "{{.PackageName}}_test"
-dir: "{{.InterfaceDir}}"
-inpackage: False
+dir: '{{.InterfaceDir}}'
+structname: '{{.InterfaceName}}Mock'
+filename: "{{.InterfaceName | lower}}_test.go"
+pkgname: '{{.SrcPackageName}}_test'
+template: testify
+template-data:
+  unroll-variadic: true
 packages:
-  github.com/mbretter/go-mongodb:
+  github.com/mbretter/go-mongodb/v2:
     interfaces:
       Connector:
