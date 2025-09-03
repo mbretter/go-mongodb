@@ -15,6 +15,11 @@ storing binary data.
 
 This is version 2 of the package, which uses mongo-driver v2.
 
+The package contains a `utils.Flatten` function, which can flatten a struct into a map, with paths containing dots.  
+This function was copied from [chidiwilliams/flatbson]https://github.com/chidiwilliams/flatbson and modified to work with 
+the mongo-driver v2.  
+Furthermore, the struct_tag_parser from the mongo-driver was included because the v2 version of the driver does not export it anymore.
+
 ## Install
 
 ```
@@ -113,6 +118,28 @@ The NullString datatype BSON-encodes empty strings to null and vice versa.
 ### NullNumbers
 
 The various number datatypes are treated as BSON-null if their value is 0 oder 0.0 and vice versa.
+
+## Flatten
+
+Especially when updating documents, it is often necessary not to overwrite the whole document, but only a few fields.
+This can be done by using the `utils.Flatten` function.  
+Note that this function works with structs only, not maps. 
+
+```go
+connector, err := mongodb.NewConnector(mongodb.NewParams{
+    Uri:      "mongodb://user:pass@127.0.0.1/mydb",
+    Database: "mydb",
+})
+
+...
+
+flat, err := utils.Flatten(somestruct)
+if err != nil {
+    return err
+}
+
+res, err = connector.UpdateOne(bson.M{"_id": myId}, bson.M{"$set": flat})
+```
 
 ## Example
 
