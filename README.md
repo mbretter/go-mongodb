@@ -15,10 +15,10 @@ storing binary data.
 
 This is version 2 of the package, which uses mongo-driver v2.
 
-The package contains a `utils.Flatten` function, which can flatten a struct into a map, with paths containing dots.  
-This function was copied from [chidiwilliams/flatbson]https://github.com/chidiwilliams/flatbson and modified to work with 
+The package contains a `utils.Flatten` function, which can flatten a struct into a map, with paths containing dots. 
+This function was copied from [chidiwilliams/flatbson](https://github.com/chidiwilliams/flatbson) and modified to work with 
 the mongo-driver v2.  
-Furthermore, the struct_tag_parser from the mongo-driver was included because the v2 version of the driver does not export it anymore.
+Furthermore, the `struct_tag_parser` from the mongo-driver was included because the v2 version of the driver does not export it anymore.
 
 ## Install
 
