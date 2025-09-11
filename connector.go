@@ -11,10 +11,11 @@ package mongodb
 import (
 	"context"
 	"errors"
+	"time"
+
 	"go.mongodb.org/mongo-driver/v2/bson"
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.mongodb.org/mongo-driver/v2/mongo/options"
-	"time"
 )
 
 // StdConnector handles connections and interactions with the MongoDB client, database, and collections.
@@ -387,16 +388,21 @@ func (conn *StdConnector) GetNextSeq(name string, opts ...string) (seq int64, er
 	}
 
 	seqCollection := "Sequences"
-	if len(opts) > 0 {
+	if len(opts) > 0 && len(opts[0]) > 0 {
 		seqCollection = opts[0]
+	}
+
+	fieldName := "Current"
+	if len(opts) > 1 && len(opts[1]) > 0 {
+		fieldName = opts[1]
 	}
 
 	res := conn.WithCollection(seqCollection).FindOneAndUpdate(
 		bson.D{{"_id", name}},
-		bson.D{{"$inc", bson.D{{"Current", 1}}}},
+		bson.D{{"$inc", bson.D{{fieldName, 1}}}},
 		options.FindOneAndUpdate().SetUpsert(true),
 		options.FindOneAndUpdate().SetReturnDocument(options.After),
-		options.FindOneAndUpdate().SetProjection(bson.D{{"Current", 1}}))
+		options.FindOneAndUpdate().SetProjection(bson.D{{fieldName, 1}}))
 
 	if res == nil {
 		return 0, nil
@@ -407,7 +413,7 @@ func (conn *StdConnector) GetNextSeq(name string, opts ...string) (seq int64, er
 		return 0, err
 	}
 
-	switch v := data["Current"].(type) {
+	switch v := data[fieldName].(type) {
 	case int32:
 		return int64(int(v)), nil
 	case int64:
