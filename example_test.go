@@ -2,14 +2,15 @@ package mongodb_test
 
 import (
 	"errors"
+	"log"
+	"os"
+	"testing"
+
 	"github.com/mbretter/go-mongodb/v2"
 	"github.com/mbretter/go-mongodb/v2/types"
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/v2/bson"
 	"go.mongodb.org/mongo-driver/v2/mongo"
-	"log"
-	"os"
-	"testing"
 )
 
 // User represents a user entity with an ID, username, and personal details such as firstname and lastname.
@@ -164,10 +165,10 @@ func Example() {
 	}
 }
 
-// Example_TestCreate tests the scenario for user creation, ensuring correct insertion and data consistency.
+// TestCreate_Example tests the scenario for user creation, ensuring correct insertion and data consistency.
 // The Connector is mocked using the auto-generated mock by mockery.
 // The ObjectId generator function is stubbed to get reproducable results.
-func Example_TestCreate(t *testing.T) {
+func TestCreate_Example(t *testing.T) {
 	newUserId := "66cc9ca8c042f7a732b7fc2a"
 	types.SetObjectIdGenerator(func() string { return newUserId })
 
