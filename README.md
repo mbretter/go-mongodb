@@ -141,6 +141,14 @@ if err != nil {
 res, err = connector.UpdateOne(bson.M{"_id": myId}, bson.M{"$set": flat})
 ```
 
+## Map2BsonM
+
+Map2BsonM converts a map to a bson.M, it is useful if you want to use a map as a filter for a query.
+
+```go
+b := Map2BsonM(map[string]string{"a": "b"})
+```
+
 ## Example
 
 This is a real life example, demonstrating how the connector could be integrated.
