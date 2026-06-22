@@ -72,16 +72,18 @@ type NewParams struct {
 // NewConnector establishes a new connection to the mongo database using the provided parameters.
 // It returns a StdConnector
 func NewConnector(params NewParams) (*StdConnector, error) {
-	opts := options.Client().ApplyURI(params.Uri)
-	opts.SetConnectTimeout(5 * time.Second)
-
-	bsonOpts := &options.BSONOptions{
+	return NewConnectorWithOptions(params, &options.BSONOptions{
 		NilSliceAsEmpty: true,
-	}
+	})
+}
 
-	opts.SetBSONOptions(bsonOpts)
+func NewConnectorWithOptions(params NewParams, bsonOpts *options.BSONOptions) (*StdConnector, error) {
+	cliOpts := options.Client().ApplyURI(params.Uri)
+	cliOpts.SetConnectTimeout(5 * time.Second)
 
-	client, err := mongo.Connect(opts)
+	cliOpts.SetBSONOptions(bsonOpts)
+
+	client, err := mongo.Connect(cliOpts)
 	if err != nil {
 		return nil, err
 	}

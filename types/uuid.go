@@ -6,6 +6,7 @@ package types
 import (
 	"encoding/json"
 	"errors"
+
 	"github.com/google/uuid"
 	"go.mongodb.org/mongo-driver/v2/bson"
 )
