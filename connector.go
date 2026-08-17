@@ -400,11 +400,11 @@ func (conn *StdConnector) GetNextSeq(name string, opts ...string) (seq int64, er
 	}
 
 	res := conn.WithCollection(seqCollection).FindOneAndUpdate(
-		bson.D{{"_id", name}},
-		bson.D{{"$inc", bson.D{{fieldName, 1}}}},
+		bson.M{"_id": name},
+		bson.M{"$inc": bson.M{fieldName: 1}},
 		options.FindOneAndUpdate().SetUpsert(true),
 		options.FindOneAndUpdate().SetReturnDocument(options.After),
-		options.FindOneAndUpdate().SetProjection(bson.D{{fieldName, 1}}))
+		options.FindOneAndUpdate().SetProjection(bson.M{fieldName: 1}))
 
 	if res == nil {
 		return 0, nil
