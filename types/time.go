@@ -3,6 +3,7 @@ package types
 
 import (
 	"encoding/json"
+	"errors"
 	"time"
 
 	"go.mongodb.org/mongo-driver/v2/bson"
@@ -24,4 +25,28 @@ func (v NullTime) MarshalBSONValue() (byte, []byte, error) {
 		return byte(bson.TypeNull), nil, nil
 	}
 	return marshalBsonValue(time.Time(v))
+}
+
+// UnmarshalBSONValue deserializes a BSON value into a time.Time.
+func (v *NullTime) UnmarshalBSONValue(typ byte, data []byte) error {
+	t := bson.Type(typ)
+	if t == bson.TypeNull {
+		*v = NullTime(time.Time{})
+		return nil
+	}
+
+	if t != bson.TypeDateTime {
+		return errors.New("wrong bson type expected datetime")
+	}
+
+	var dt bson.DateTime
+
+	err := bson.UnmarshalValue(t, data, &dt)
+	if err != nil {
+		return err
+	}
+
+	*v = NullTime(dt.Time())
+
+	return nil
 }

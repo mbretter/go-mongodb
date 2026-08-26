@@ -43,11 +43,11 @@ func (_m *ConnectorMock) EXPECT() *ConnectorMock_Expecter {
 // Aggregate provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) Aggregate(pipeline interface{}, opts ...options.Lister[options.AggregateOptions]) (*mongo.Cursor, error) {
 	// options.Lister[options.AggregateOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, pipeline)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -84,9 +84,9 @@ type ConnectorMock_Aggregate_Call struct {
 // Aggregate is a helper method to define mock.On call
 //   - pipeline interface{}
 //   - opts ...options.Lister[options.AggregateOptions]
-func (_e *ConnectorMock_Expecter) Aggregate(pipeline interface{}, opts ...interface{}) *ConnectorMock_Aggregate_Call {
+func (_e *ConnectorMock_Expecter) Aggregate(pipeline any, opts ...any) *ConnectorMock_Aggregate_Call {
 	return &ConnectorMock_Aggregate_Call{Call: _e.mock.On("Aggregate",
-		append([]interface{}{pipeline}, opts...)...)}
+		append([]any{pipeline}, opts...)...)}
 }
 
 func (_c *ConnectorMock_Aggregate_Call) Run(run func(pipeline interface{}, opts ...options.Lister[options.AggregateOptions])) *ConnectorMock_Aggregate_Call {
@@ -124,11 +124,11 @@ func (_c *ConnectorMock_Aggregate_Call) RunAndReturn(run func(pipeline interface
 // Collection provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) Collection(coll string, opts ...options.Lister[options.CollectionOptions]) *mongo.Collection {
 	// options.Lister[options.CollectionOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, coll)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -156,9 +156,9 @@ type ConnectorMock_Collection_Call struct {
 // Collection is a helper method to define mock.On call
 //   - coll string
 //   - opts ...options.Lister[options.CollectionOptions]
-func (_e *ConnectorMock_Expecter) Collection(coll interface{}, opts ...interface{}) *ConnectorMock_Collection_Call {
+func (_e *ConnectorMock_Expecter) Collection(coll any, opts ...any) *ConnectorMock_Collection_Call {
 	return &ConnectorMock_Collection_Call{Call: _e.mock.On("Collection",
-		append([]interface{}{coll}, opts...)...)}
+		append([]any{coll}, opts...)...)}
 }
 
 func (_c *ConnectorMock_Collection_Call) Run(run func(coll string, opts ...options.Lister[options.CollectionOptions])) *ConnectorMock_Collection_Call {
@@ -196,11 +196,11 @@ func (_c *ConnectorMock_Collection_Call) RunAndReturn(run func(coll string, opts
 // Count provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) Count(filter interface{}, opts ...options.Lister[options.CountOptions]) (int64, error) {
 	// options.Lister[options.CountOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, filter)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -235,9 +235,9 @@ type ConnectorMock_Count_Call struct {
 // Count is a helper method to define mock.On call
 //   - filter interface{}
 //   - opts ...options.Lister[options.CountOptions]
-func (_e *ConnectorMock_Expecter) Count(filter interface{}, opts ...interface{}) *ConnectorMock_Count_Call {
+func (_e *ConnectorMock_Expecter) Count(filter any, opts ...any) *ConnectorMock_Count_Call {
 	return &ConnectorMock_Count_Call{Call: _e.mock.On("Count",
-		append([]interface{}{filter}, opts...)...)}
+		append([]any{filter}, opts...)...)}
 }
 
 func (_c *ConnectorMock_Count_Call) Run(run func(filter interface{}, opts ...options.Lister[options.CountOptions])) *ConnectorMock_Count_Call {
@@ -275,11 +275,11 @@ func (_c *ConnectorMock_Count_Call) RunAndReturn(run func(filter interface{}, op
 // CreateIndex provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) CreateIndex(model mongo.IndexModel, opts ...options.Lister[options.CreateIndexesOptions]) (string, error) {
 	// options.Lister[options.CreateIndexesOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, model)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -314,9 +314,9 @@ type ConnectorMock_CreateIndex_Call struct {
 // CreateIndex is a helper method to define mock.On call
 //   - model mongo.IndexModel
 //   - opts ...options.Lister[options.CreateIndexesOptions]
-func (_e *ConnectorMock_Expecter) CreateIndex(model interface{}, opts ...interface{}) *ConnectorMock_CreateIndex_Call {
+func (_e *ConnectorMock_Expecter) CreateIndex(model any, opts ...any) *ConnectorMock_CreateIndex_Call {
 	return &ConnectorMock_CreateIndex_Call{Call: _e.mock.On("CreateIndex",
-		append([]interface{}{model}, opts...)...)}
+		append([]any{model}, opts...)...)}
 }
 
 func (_c *ConnectorMock_CreateIndex_Call) Run(run func(model mongo.IndexModel, opts ...options.Lister[options.CreateIndexesOptions])) *ConnectorMock_CreateIndex_Call {
@@ -354,11 +354,11 @@ func (_c *ConnectorMock_CreateIndex_Call) RunAndReturn(run func(model mongo.Inde
 // CreateSearchIndex provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) CreateSearchIndex(model mongo.SearchIndexModel, opts ...options.Lister[options.CreateSearchIndexesOptions]) (string, error) {
 	// options.Lister[options.CreateSearchIndexesOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, model)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -393,9 +393,9 @@ type ConnectorMock_CreateSearchIndex_Call struct {
 // CreateSearchIndex is a helper method to define mock.On call
 //   - model mongo.SearchIndexModel
 //   - opts ...options.Lister[options.CreateSearchIndexesOptions]
-func (_e *ConnectorMock_Expecter) CreateSearchIndex(model interface{}, opts ...interface{}) *ConnectorMock_CreateSearchIndex_Call {
+func (_e *ConnectorMock_Expecter) CreateSearchIndex(model any, opts ...any) *ConnectorMock_CreateSearchIndex_Call {
 	return &ConnectorMock_CreateSearchIndex_Call{Call: _e.mock.On("CreateSearchIndex",
-		append([]interface{}{model}, opts...)...)}
+		append([]any{model}, opts...)...)}
 }
 
 func (_c *ConnectorMock_CreateSearchIndex_Call) Run(run func(model mongo.SearchIndexModel, opts ...options.Lister[options.CreateSearchIndexesOptions])) *ConnectorMock_CreateSearchIndex_Call {
@@ -501,7 +501,7 @@ type ConnectorMock_Decode_Call struct {
 // Decode is a helper method to define mock.On call
 //   - cur *mongo.Cursor
 //   - val interface{}
-func (_e *ConnectorMock_Expecter) Decode(cur interface{}, val interface{}) *ConnectorMock_Decode_Call {
+func (_e *ConnectorMock_Expecter) Decode(cur any, val any) *ConnectorMock_Decode_Call {
 	return &ConnectorMock_Decode_Call{Call: _e.mock.On("Decode", cur, val)}
 }
 
@@ -536,11 +536,11 @@ func (_c *ConnectorMock_Decode_Call) RunAndReturn(run func(cur *mongo.Cursor, va
 // DeleteMany provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) DeleteMany(filter interface{}, opts ...options.Lister[options.DeleteManyOptions]) (*mongo.DeleteResult, error) {
 	// options.Lister[options.DeleteManyOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, filter)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -577,9 +577,9 @@ type ConnectorMock_DeleteMany_Call struct {
 // DeleteMany is a helper method to define mock.On call
 //   - filter interface{}
 //   - opts ...options.Lister[options.DeleteManyOptions]
-func (_e *ConnectorMock_Expecter) DeleteMany(filter interface{}, opts ...interface{}) *ConnectorMock_DeleteMany_Call {
+func (_e *ConnectorMock_Expecter) DeleteMany(filter any, opts ...any) *ConnectorMock_DeleteMany_Call {
 	return &ConnectorMock_DeleteMany_Call{Call: _e.mock.On("DeleteMany",
-		append([]interface{}{filter}, opts...)...)}
+		append([]any{filter}, opts...)...)}
 }
 
 func (_c *ConnectorMock_DeleteMany_Call) Run(run func(filter interface{}, opts ...options.Lister[options.DeleteManyOptions])) *ConnectorMock_DeleteMany_Call {
@@ -617,11 +617,11 @@ func (_c *ConnectorMock_DeleteMany_Call) RunAndReturn(run func(filter interface{
 // DeleteOne provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) DeleteOne(filter interface{}, opts ...options.Lister[options.DeleteOneOptions]) (*mongo.DeleteResult, error) {
 	// options.Lister[options.DeleteOneOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, filter)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -658,9 +658,9 @@ type ConnectorMock_DeleteOne_Call struct {
 // DeleteOne is a helper method to define mock.On call
 //   - filter interface{}
 //   - opts ...options.Lister[options.DeleteOneOptions]
-func (_e *ConnectorMock_Expecter) DeleteOne(filter interface{}, opts ...interface{}) *ConnectorMock_DeleteOne_Call {
+func (_e *ConnectorMock_Expecter) DeleteOne(filter any, opts ...any) *ConnectorMock_DeleteOne_Call {
 	return &ConnectorMock_DeleteOne_Call{Call: _e.mock.On("DeleteOne",
-		append([]interface{}{filter}, opts...)...)}
+		append([]any{filter}, opts...)...)}
 }
 
 func (_c *ConnectorMock_DeleteOne_Call) Run(run func(filter interface{}, opts ...options.Lister[options.DeleteOneOptions])) *ConnectorMock_DeleteOne_Call {
@@ -698,11 +698,11 @@ func (_c *ConnectorMock_DeleteOne_Call) RunAndReturn(run func(filter interface{}
 // Distinct provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) Distinct(fieldName string, filter interface{}, opts ...options.Lister[options.DistinctOptions]) (*mongo.DistinctResult, error) {
 	// options.Lister[options.DistinctOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, fieldName, filter)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -740,9 +740,9 @@ type ConnectorMock_Distinct_Call struct {
 //   - fieldName string
 //   - filter interface{}
 //   - opts ...options.Lister[options.DistinctOptions]
-func (_e *ConnectorMock_Expecter) Distinct(fieldName interface{}, filter interface{}, opts ...interface{}) *ConnectorMock_Distinct_Call {
+func (_e *ConnectorMock_Expecter) Distinct(fieldName any, filter any, opts ...any) *ConnectorMock_Distinct_Call {
 	return &ConnectorMock_Distinct_Call{Call: _e.mock.On("Distinct",
-		append([]interface{}{fieldName, filter}, opts...)...)}
+		append([]any{fieldName, filter}, opts...)...)}
 }
 
 func (_c *ConnectorMock_Distinct_Call) Run(run func(fieldName string, filter interface{}, opts ...options.Lister[options.DistinctOptions])) *ConnectorMock_Distinct_Call {
@@ -851,7 +851,7 @@ type ConnectorMock_FetchAll_Call struct {
 // FetchAll is a helper method to define mock.On call
 //   - cur *mongo.Cursor
 //   - results interface{}
-func (_e *ConnectorMock_Expecter) FetchAll(cur interface{}, results interface{}) *ConnectorMock_FetchAll_Call {
+func (_e *ConnectorMock_Expecter) FetchAll(cur any, results any) *ConnectorMock_FetchAll_Call {
 	return &ConnectorMock_FetchAll_Call{Call: _e.mock.On("FetchAll", cur, results)}
 }
 
@@ -886,11 +886,11 @@ func (_c *ConnectorMock_FetchAll_Call) RunAndReturn(run func(cur *mongo.Cursor, 
 // Find provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) Find(filter interface{}, opts ...options.Lister[options.FindOptions]) (*mongo.Cursor, error) {
 	// options.Lister[options.FindOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, filter)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -927,9 +927,9 @@ type ConnectorMock_Find_Call struct {
 // Find is a helper method to define mock.On call
 //   - filter interface{}
 //   - opts ...options.Lister[options.FindOptions]
-func (_e *ConnectorMock_Expecter) Find(filter interface{}, opts ...interface{}) *ConnectorMock_Find_Call {
+func (_e *ConnectorMock_Expecter) Find(filter any, opts ...any) *ConnectorMock_Find_Call {
 	return &ConnectorMock_Find_Call{Call: _e.mock.On("Find",
-		append([]interface{}{filter}, opts...)...)}
+		append([]any{filter}, opts...)...)}
 }
 
 func (_c *ConnectorMock_Find_Call) Run(run func(filter interface{}, opts ...options.Lister[options.FindOptions])) *ConnectorMock_Find_Call {
@@ -967,11 +967,11 @@ func (_c *ConnectorMock_Find_Call) RunAndReturn(run func(filter interface{}, opt
 // FindOne provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) FindOne(filter interface{}, opts ...options.Lister[options.FindOneOptions]) *mongo.SingleResult {
 	// options.Lister[options.FindOneOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, filter)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -999,9 +999,9 @@ type ConnectorMock_FindOne_Call struct {
 // FindOne is a helper method to define mock.On call
 //   - filter interface{}
 //   - opts ...options.Lister[options.FindOneOptions]
-func (_e *ConnectorMock_Expecter) FindOne(filter interface{}, opts ...interface{}) *ConnectorMock_FindOne_Call {
+func (_e *ConnectorMock_Expecter) FindOne(filter any, opts ...any) *ConnectorMock_FindOne_Call {
 	return &ConnectorMock_FindOne_Call{Call: _e.mock.On("FindOne",
-		append([]interface{}{filter}, opts...)...)}
+		append([]any{filter}, opts...)...)}
 }
 
 func (_c *ConnectorMock_FindOne_Call) Run(run func(filter interface{}, opts ...options.Lister[options.FindOneOptions])) *ConnectorMock_FindOne_Call {
@@ -1039,11 +1039,11 @@ func (_c *ConnectorMock_FindOne_Call) RunAndReturn(run func(filter interface{}, 
 // FindOneAndDelete provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) FindOneAndDelete(filter interface{}, opts ...options.Lister[options.FindOneAndDeleteOptions]) *mongo.SingleResult {
 	// options.Lister[options.FindOneAndDeleteOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, filter)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -1071,9 +1071,9 @@ type ConnectorMock_FindOneAndDelete_Call struct {
 // FindOneAndDelete is a helper method to define mock.On call
 //   - filter interface{}
 //   - opts ...options.Lister[options.FindOneAndDeleteOptions]
-func (_e *ConnectorMock_Expecter) FindOneAndDelete(filter interface{}, opts ...interface{}) *ConnectorMock_FindOneAndDelete_Call {
+func (_e *ConnectorMock_Expecter) FindOneAndDelete(filter any, opts ...any) *ConnectorMock_FindOneAndDelete_Call {
 	return &ConnectorMock_FindOneAndDelete_Call{Call: _e.mock.On("FindOneAndDelete",
-		append([]interface{}{filter}, opts...)...)}
+		append([]any{filter}, opts...)...)}
 }
 
 func (_c *ConnectorMock_FindOneAndDelete_Call) Run(run func(filter interface{}, opts ...options.Lister[options.FindOneAndDeleteOptions])) *ConnectorMock_FindOneAndDelete_Call {
@@ -1111,11 +1111,11 @@ func (_c *ConnectorMock_FindOneAndDelete_Call) RunAndReturn(run func(filter inte
 // FindOneAndReplace provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) FindOneAndReplace(filter interface{}, replacement interface{}, opts ...options.Lister[options.FindOneAndReplaceOptions]) *mongo.SingleResult {
 	// options.Lister[options.FindOneAndReplaceOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, filter, replacement)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -1144,9 +1144,9 @@ type ConnectorMock_FindOneAndReplace_Call struct {
 //   - filter interface{}
 //   - replacement interface{}
 //   - opts ...options.Lister[options.FindOneAndReplaceOptions]
-func (_e *ConnectorMock_Expecter) FindOneAndReplace(filter interface{}, replacement interface{}, opts ...interface{}) *ConnectorMock_FindOneAndReplace_Call {
+func (_e *ConnectorMock_Expecter) FindOneAndReplace(filter any, replacement any, opts ...any) *ConnectorMock_FindOneAndReplace_Call {
 	return &ConnectorMock_FindOneAndReplace_Call{Call: _e.mock.On("FindOneAndReplace",
-		append([]interface{}{filter, replacement}, opts...)...)}
+		append([]any{filter, replacement}, opts...)...)}
 }
 
 func (_c *ConnectorMock_FindOneAndReplace_Call) Run(run func(filter interface{}, replacement interface{}, opts ...options.Lister[options.FindOneAndReplaceOptions])) *ConnectorMock_FindOneAndReplace_Call {
@@ -1189,11 +1189,11 @@ func (_c *ConnectorMock_FindOneAndReplace_Call) RunAndReturn(run func(filter int
 // FindOneAndUpdate provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) FindOneAndUpdate(filter interface{}, update interface{}, opts ...options.Lister[options.FindOneAndUpdateOptions]) *mongo.SingleResult {
 	// options.Lister[options.FindOneAndUpdateOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, filter, update)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -1222,9 +1222,9 @@ type ConnectorMock_FindOneAndUpdate_Call struct {
 //   - filter interface{}
 //   - update interface{}
 //   - opts ...options.Lister[options.FindOneAndUpdateOptions]
-func (_e *ConnectorMock_Expecter) FindOneAndUpdate(filter interface{}, update interface{}, opts ...interface{}) *ConnectorMock_FindOneAndUpdate_Call {
+func (_e *ConnectorMock_Expecter) FindOneAndUpdate(filter any, update any, opts ...any) *ConnectorMock_FindOneAndUpdate_Call {
 	return &ConnectorMock_FindOneAndUpdate_Call{Call: _e.mock.On("FindOneAndUpdate",
-		append([]interface{}{filter, update}, opts...)...)}
+		append([]any{filter, update}, opts...)...)}
 }
 
 func (_c *ConnectorMock_FindOneAndUpdate_Call) Run(run func(filter interface{}, update interface{}, opts ...options.Lister[options.FindOneAndUpdateOptions])) *ConnectorMock_FindOneAndUpdate_Call {
@@ -1267,11 +1267,11 @@ func (_c *ConnectorMock_FindOneAndUpdate_Call) RunAndReturn(run func(filter inte
 // GetNextSeq provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) GetNextSeq(name string, opts ...string) (int64, error) {
 	// string
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, name)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -1306,9 +1306,9 @@ type ConnectorMock_GetNextSeq_Call struct {
 // GetNextSeq is a helper method to define mock.On call
 //   - name string
 //   - opts ...string
-func (_e *ConnectorMock_Expecter) GetNextSeq(name interface{}, opts ...interface{}) *ConnectorMock_GetNextSeq_Call {
+func (_e *ConnectorMock_Expecter) GetNextSeq(name any, opts ...any) *ConnectorMock_GetNextSeq_Call {
 	return &ConnectorMock_GetNextSeq_Call{Call: _e.mock.On("GetNextSeq",
-		append([]interface{}{name}, opts...)...)}
+		append([]any{name}, opts...)...)}
 }
 
 func (_c *ConnectorMock_GetNextSeq_Call) Run(run func(name string, opts ...string)) *ConnectorMock_GetNextSeq_Call {
@@ -1401,11 +1401,11 @@ func (_c *ConnectorMock_Indexes_Call) RunAndReturn(run func() (*mongo.IndexView,
 // InsertMany provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) InsertMany(document []interface{}, opts ...options.Lister[options.InsertManyOptions]) (*mongo.InsertManyResult, error) {
 	// options.Lister[options.InsertManyOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, document)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -1442,9 +1442,9 @@ type ConnectorMock_InsertMany_Call struct {
 // InsertMany is a helper method to define mock.On call
 //   - document []interface{}
 //   - opts ...options.Lister[options.InsertManyOptions]
-func (_e *ConnectorMock_Expecter) InsertMany(document interface{}, opts ...interface{}) *ConnectorMock_InsertMany_Call {
+func (_e *ConnectorMock_Expecter) InsertMany(document any, opts ...any) *ConnectorMock_InsertMany_Call {
 	return &ConnectorMock_InsertMany_Call{Call: _e.mock.On("InsertMany",
-		append([]interface{}{document}, opts...)...)}
+		append([]any{document}, opts...)...)}
 }
 
 func (_c *ConnectorMock_InsertMany_Call) Run(run func(document []interface{}, opts ...options.Lister[options.InsertManyOptions])) *ConnectorMock_InsertMany_Call {
@@ -1482,11 +1482,11 @@ func (_c *ConnectorMock_InsertMany_Call) RunAndReturn(run func(document []interf
 // InsertOne provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) InsertOne(document interface{}, opts ...options.Lister[options.InsertOneOptions]) (*mongo.InsertOneResult, error) {
 	// options.Lister[options.InsertOneOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, document)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -1523,9 +1523,9 @@ type ConnectorMock_InsertOne_Call struct {
 // InsertOne is a helper method to define mock.On call
 //   - document interface{}
 //   - opts ...options.Lister[options.InsertOneOptions]
-func (_e *ConnectorMock_Expecter) InsertOne(document interface{}, opts ...interface{}) *ConnectorMock_InsertOne_Call {
+func (_e *ConnectorMock_Expecter) InsertOne(document any, opts ...any) *ConnectorMock_InsertOne_Call {
 	return &ConnectorMock_InsertOne_Call{Call: _e.mock.On("InsertOne",
-		append([]interface{}{document}, opts...)...)}
+		append([]any{document}, opts...)...)}
 }
 
 func (_c *ConnectorMock_InsertOne_Call) Run(run func(document interface{}, opts ...options.Lister[options.InsertOneOptions])) *ConnectorMock_InsertOne_Call {
@@ -1639,7 +1639,7 @@ type ConnectorMock_Next_Call struct {
 
 // Next is a helper method to define mock.On call
 //   - cur *mongo.Cursor
-func (_e *ConnectorMock_Expecter) Next(cur interface{}) *ConnectorMock_Next_Call {
+func (_e *ConnectorMock_Expecter) Next(cur any) *ConnectorMock_Next_Call {
 	return &ConnectorMock_Next_Call{Call: _e.mock.On("Next", cur)}
 }
 
@@ -1669,11 +1669,11 @@ func (_c *ConnectorMock_Next_Call) RunAndReturn(run func(cur *mongo.Cursor) bool
 // ReplaceOne provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) ReplaceOne(filter interface{}, update interface{}, opts ...options.Lister[options.ReplaceOptions]) (*mongo.UpdateResult, error) {
 	// options.Lister[options.ReplaceOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, filter, update)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -1711,9 +1711,9 @@ type ConnectorMock_ReplaceOne_Call struct {
 //   - filter interface{}
 //   - update interface{}
 //   - opts ...options.Lister[options.ReplaceOptions]
-func (_e *ConnectorMock_Expecter) ReplaceOne(filter interface{}, update interface{}, opts ...interface{}) *ConnectorMock_ReplaceOne_Call {
+func (_e *ConnectorMock_Expecter) ReplaceOne(filter any, update any, opts ...any) *ConnectorMock_ReplaceOne_Call {
 	return &ConnectorMock_ReplaceOne_Call{Call: _e.mock.On("ReplaceOne",
-		append([]interface{}{filter, update}, opts...)...)}
+		append([]any{filter, update}, opts...)...)}
 }
 
 func (_c *ConnectorMock_ReplaceOne_Call) Run(run func(filter interface{}, update interface{}, opts ...options.Lister[options.ReplaceOptions])) *ConnectorMock_ReplaceOne_Call {
@@ -1811,11 +1811,11 @@ func (_c *ConnectorMock_SearchIndexes_Call) RunAndReturn(run func() (*mongo.Sear
 // UpdateById provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) UpdateById(id interface{}, update interface{}, opts ...options.Lister[options.UpdateOneOptions]) (*mongo.UpdateResult, error) {
 	// options.Lister[options.UpdateOneOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, id, update)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -1853,9 +1853,9 @@ type ConnectorMock_UpdateById_Call struct {
 //   - id interface{}
 //   - update interface{}
 //   - opts ...options.Lister[options.UpdateOneOptions]
-func (_e *ConnectorMock_Expecter) UpdateById(id interface{}, update interface{}, opts ...interface{}) *ConnectorMock_UpdateById_Call {
+func (_e *ConnectorMock_Expecter) UpdateById(id any, update any, opts ...any) *ConnectorMock_UpdateById_Call {
 	return &ConnectorMock_UpdateById_Call{Call: _e.mock.On("UpdateById",
-		append([]interface{}{id, update}, opts...)...)}
+		append([]any{id, update}, opts...)...)}
 }
 
 func (_c *ConnectorMock_UpdateById_Call) Run(run func(id interface{}, update interface{}, opts ...options.Lister[options.UpdateOneOptions])) *ConnectorMock_UpdateById_Call {
@@ -1898,11 +1898,11 @@ func (_c *ConnectorMock_UpdateById_Call) RunAndReturn(run func(id interface{}, u
 // UpdateMany provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) UpdateMany(filter interface{}, update interface{}, opts ...options.Lister[options.UpdateManyOptions]) (*mongo.UpdateResult, error) {
 	// options.Lister[options.UpdateManyOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, filter, update)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -1940,9 +1940,9 @@ type ConnectorMock_UpdateMany_Call struct {
 //   - filter interface{}
 //   - update interface{}
 //   - opts ...options.Lister[options.UpdateManyOptions]
-func (_e *ConnectorMock_Expecter) UpdateMany(filter interface{}, update interface{}, opts ...interface{}) *ConnectorMock_UpdateMany_Call {
+func (_e *ConnectorMock_Expecter) UpdateMany(filter any, update any, opts ...any) *ConnectorMock_UpdateMany_Call {
 	return &ConnectorMock_UpdateMany_Call{Call: _e.mock.On("UpdateMany",
-		append([]interface{}{filter, update}, opts...)...)}
+		append([]any{filter, update}, opts...)...)}
 }
 
 func (_c *ConnectorMock_UpdateMany_Call) Run(run func(filter interface{}, update interface{}, opts ...options.Lister[options.UpdateManyOptions])) *ConnectorMock_UpdateMany_Call {
@@ -1985,11 +1985,11 @@ func (_c *ConnectorMock_UpdateMany_Call) RunAndReturn(run func(filter interface{
 // UpdateOne provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) UpdateOne(filter interface{}, update interface{}, opts ...options.Lister[options.UpdateOneOptions]) (*mongo.UpdateResult, error) {
 	// options.Lister[options.UpdateOneOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, filter, update)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -2027,9 +2027,9 @@ type ConnectorMock_UpdateOne_Call struct {
 //   - filter interface{}
 //   - update interface{}
 //   - opts ...options.Lister[options.UpdateOneOptions]
-func (_e *ConnectorMock_Expecter) UpdateOne(filter interface{}, update interface{}, opts ...interface{}) *ConnectorMock_UpdateOne_Call {
+func (_e *ConnectorMock_Expecter) UpdateOne(filter any, update any, opts ...any) *ConnectorMock_UpdateOne_Call {
 	return &ConnectorMock_UpdateOne_Call{Call: _e.mock.On("UpdateOne",
-		append([]interface{}{filter, update}, opts...)...)}
+		append([]any{filter, update}, opts...)...)}
 }
 
 func (_c *ConnectorMock_UpdateOne_Call) Run(run func(filter interface{}, update interface{}, opts ...options.Lister[options.UpdateOneOptions])) *ConnectorMock_UpdateOne_Call {
@@ -2072,11 +2072,11 @@ func (_c *ConnectorMock_UpdateOne_Call) RunAndReturn(run func(filter interface{}
 // Watch provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) Watch(pipeline interface{}, opts ...options.Lister[options.ChangeStreamOptions]) (*mongo.ChangeStream, error) {
 	// options.Lister[options.ChangeStreamOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, pipeline)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -2113,9 +2113,9 @@ type ConnectorMock_Watch_Call struct {
 // Watch is a helper method to define mock.On call
 //   - pipeline interface{}
 //   - opts ...options.Lister[options.ChangeStreamOptions]
-func (_e *ConnectorMock_Expecter) Watch(pipeline interface{}, opts ...interface{}) *ConnectorMock_Watch_Call {
+func (_e *ConnectorMock_Expecter) Watch(pipeline any, opts ...any) *ConnectorMock_Watch_Call {
 	return &ConnectorMock_Watch_Call{Call: _e.mock.On("Watch",
-		append([]interface{}{pipeline}, opts...)...)}
+		append([]any{pipeline}, opts...)...)}
 }
 
 func (_c *ConnectorMock_Watch_Call) Run(run func(pipeline interface{}, opts ...options.Lister[options.ChangeStreamOptions])) *ConnectorMock_Watch_Call {
@@ -2153,11 +2153,11 @@ func (_c *ConnectorMock_Watch_Call) RunAndReturn(run func(pipeline interface{}, 
 // WithCollection provides a mock function for the type ConnectorMock
 func (_mock *ConnectorMock) WithCollection(coll string, opts ...options.Lister[options.CollectionOptions]) mongodb.Connector {
 	// options.Lister[options.CollectionOptions]
-	_va := make([]interface{}, len(opts))
+	_va := make([]any, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
 	}
-	var _ca []interface{}
+	var _ca []any
 	_ca = append(_ca, coll)
 	_ca = append(_ca, _va...)
 	ret := _mock.Called(_ca...)
@@ -2185,9 +2185,9 @@ type ConnectorMock_WithCollection_Call struct {
 // WithCollection is a helper method to define mock.On call
 //   - coll string
 //   - opts ...options.Lister[options.CollectionOptions]
-func (_e *ConnectorMock_Expecter) WithCollection(coll interface{}, opts ...interface{}) *ConnectorMock_WithCollection_Call {
+func (_e *ConnectorMock_Expecter) WithCollection(coll any, opts ...any) *ConnectorMock_WithCollection_Call {
 	return &ConnectorMock_WithCollection_Call{Call: _e.mock.On("WithCollection",
-		append([]interface{}{coll}, opts...)...)}
+		append([]any{coll}, opts...)...)}
 }
 
 func (_c *ConnectorMock_WithCollection_Call) Run(run func(coll string, opts ...options.Lister[options.CollectionOptions])) *ConnectorMock_WithCollection_Call {
@@ -2248,7 +2248,7 @@ type ConnectorMock_WithContext_Call struct {
 
 // WithContext is a helper method to define mock.On call
 //   - context1 context.Context
-func (_e *ConnectorMock_Expecter) WithContext(context1 interface{}) *ConnectorMock_WithContext_Call {
+func (_e *ConnectorMock_Expecter) WithContext(context1 any) *ConnectorMock_WithContext_Call {
 	return &ConnectorMock_WithContext_Call{Call: _e.mock.On("WithContext", context1)}
 }
 
